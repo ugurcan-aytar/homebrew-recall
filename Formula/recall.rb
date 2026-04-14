@@ -11,14 +11,14 @@ class Recall < Formula
     # account. M-series users are covered.
     on_arm do
       url "https://github.com/ugurcan-aytar/recall/releases/download/v0.1.0/recall_0.1.0_darwin_arm64.tar.gz"
-      sha256 "63cc91aef1cc488d1bd68565a4b9a6928dafb7e8e1e44ef86f13db7f68602220"
+      sha256 "8fa424b25320416370f8e0c599ba9675e9db3dd5ecce985ad19263c4e7f36dbd"
     end
   end
 
   on_linux do
     on_intel do
       url "https://github.com/ugurcan-aytar/recall/releases/download/v0.1.0/recall_0.1.0_linux_amd64.tar.gz"
-      sha256 "e0176d8e649a9e9ba1de54de8d024907bfa6e448d47047d1d6b596bf38421576"
+      sha256 "72a787aef3bfbef9f227714cc00509b57fafdc02d09c03af8f50076553356dae"
     end
   end
 
