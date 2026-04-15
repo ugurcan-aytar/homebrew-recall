@@ -2,7 +2,7 @@
 class Recall < Formula
   desc "Local search engine for your notes and documents (BM25 + vector + hybrid fusion)"
   homepage "https://github.com/ugurcan-aytar/recall"
-  version "0.2.0"
+  version "0.2.1"
   license "MIT"
 
   on_macos do
@@ -10,31 +10,43 @@ class Recall < Formula
     # macos-13 runner isn't available on the release workflow's
     # account. M-series users are covered.
     on_arm do
-      url "https://github.com/ugurcan-aytar/recall/releases/download/v0.2.0/recall_0.2.0_darwin_arm64.tar.gz"
-      sha256 "4cba552b2579178acbe3eda7da5aefe8547934a60590fa3338808cfda41d1d58"
+      url "https://github.com/ugurcan-aytar/recall/releases/download/v0.2.1/recall_0.2.1_darwin_arm64.tar.gz"
+      sha256 "90a6fae78b1ccca2b52ac79e138578afaf9346a345ee85ae1189fbb267dc4e10"
     end
   end
 
   on_linux do
     on_intel do
-      url "https://github.com/ugurcan-aytar/recall/releases/download/v0.2.0/recall_0.2.0_linux_amd64.tar.gz"
-      sha256 "3b7af7ff7d43c776deb287320725a1597ba88d147d74894f9aee32d87131f1b2"
+      url "https://github.com/ugurcan-aytar/recall/releases/download/v0.2.1/recall_0.2.1_linux_amd64.tar.gz"
+      sha256 "bf365660bb41ec39f9bb0db65d9882729d84a411ade14632768a96f3345babeb"
     end
   end
 
   def install
     bin.install "recall"
+    # Cobra emits shell completions on demand; this helper
+    # picks the right per-shell directory under Homebrew's
+    # fpath so users get tab-completion without any
+    # post-install setup.
+    generate_completions_from_executable(bin/"recall", "completion")
   end
 
   def caveats
     <<~EOS
-      recall is installed without the local GGUF embedding backend
-      (~146 MB model). To enable vector / hybrid search, either:
-        * rebuild from source with -tags 'sqlite_fts5 embed_llama'
-          (requires libbinding.a — see github.com/ugurcan-aytar/recall),
-        * or set RECALL_EMBED_PROVIDER=openai|voyage and an API key.
+      Local GGUF embedding ships baked in. The first time you run
+      'recall embed' (or 'recall query --expand|--rerank|--hyde'),
+      recall downloads the platform llama.cpp shared library
+      (~100 MB, one-time) into ~/.cache/gollama/libs/. Afterwards
+      everything runs offline.
 
-      BM25 full-text search via 'recall search' works out of the box.
+      For the embedding model itself:
+        recall models download              # nomic-embed-text-v1.5 (~146 MB)
+        recall models download --expansion  # qmd-query-expansion-1.7B (~1.3 GB)
+        recall models download --reranker   # Qwen2.5-1.5B-Instruct (~1.1 GB)
+
+      Or skip the local model entirely with an API embedder:
+        export RECALL_EMBED_PROVIDER=openai|voyage
+        export OPENAI_API_KEY=...   # or VOYAGE_API_KEY
     EOS
   end
 
