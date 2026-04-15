@@ -2,7 +2,7 @@
 class Recall < Formula
   desc "Local search engine for your notes and documents (BM25 + vector + hybrid fusion)"
   homepage "https://github.com/ugurcan-aytar/recall"
-  version "0.1.4"
+  version "0.2.0"
   license "MIT"
 
   on_macos do
@@ -10,15 +10,15 @@ class Recall < Formula
     # macos-13 runner isn't available on the release workflow's
     # account. M-series users are covered.
     on_arm do
-      url "https://github.com/ugurcan-aytar/recall/releases/download/v0.1.4/recall_0.1.4_darwin_arm64.tar.gz"
-      sha256 "815e316a8c41d156b4cfb0aa728602718639330308e26fbad313a2adcdb9ecdc"
+      url "https://github.com/ugurcan-aytar/recall/releases/download/v0.2.0/recall_0.2.0_darwin_arm64.tar.gz"
+      sha256 "4cba552b2579178acbe3eda7da5aefe8547934a60590fa3338808cfda41d1d58"
     end
   end
 
   on_linux do
     on_intel do
-      url "https://github.com/ugurcan-aytar/recall/releases/download/v0.1.4/recall_0.1.4_linux_amd64.tar.gz"
-      sha256 "70e0c3b130eb3d664c546113b5185a194c1dbe6957fb20a281407ddadddb9c92"
+      url "https://github.com/ugurcan-aytar/recall/releases/download/v0.2.0/recall_0.2.0_linux_amd64.tar.gz"
+      sha256 "3b7af7ff7d43c776deb287320725a1597ba88d147d74894f9aee32d87131f1b2"
     end
   end
 
